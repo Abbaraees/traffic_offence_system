@@ -29,6 +29,9 @@ def create_app(config_class=Config):
     from app.offences import offences as offences_bp
     app.register_blueprint(offences_bp)
 
+    from app.offenders import offenders as offenders_bp
+    app.register_blueprint(offenders_bp)
+
 
     @app.route('/hello')
     def hello():

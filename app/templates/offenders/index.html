@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold text-blue-600">Manage Offenders</h1>
+    <p class="mt-4 text-gray-600">List of all offenders.</p>
+
+    <div class="mt-8">
+        <a href="{{ url_for('offenders.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add New Offender</a>
+    </div>
+
+    <div class="mt-8">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">License Number</th>
+                    <th class="py-2 px-4 border-b">Plate Number</th>
+                    <th class="py-2 px-4 border-b">Contact Info</th>
+                    <th class="py-2 px-4 border-b">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for offender in offenders %}
+                <tr>
+                    <td class="py-2 px-4 border-b">{{ offender.name }}</td>
+                    <td class="py-2 px-4 border-b">{{ offender.license_number }}</td>
+                    <td class="py-2 px-4 border-b">{{ offender.plate_number }}</td>
+                    <td class="py-2 px-4 border-b">{{ offender.contact_info }}</td>
+                    <td class="py-2 px-4 border-b">
+                        <div class="relative inline-block text-left">
+                            <button onclick="toggleDropdown({{ offender.id }})" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                                Actions
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="dropdown-{{ offender.id }}" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                    <a href="{{ url_for('offenders.edit', id=offender.id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Edit</a>
+                                    <form method="POST" action="{{ url_for('offenders.delete', id=offender.id) }}" style="display:inline;">
+                                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown(id) {
+        var dropdown = document.getElementById('dropdown-' + id);
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.inline-flex')) {
+            var dropdowns = document.getElementsByClassName('origin-top-right');
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (!openDropdown.classList.contains('hidden')) {
+                    openDropdown.classList.add('hidden');
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold text-blue-600">Edit Offender</h1>
+    <p class="mt-4 text-gray-600">Update the details below to edit the offender.</p>
+
+    <div class="mt-8">
+        <form method="POST" action="{{ url_for('offenders.edit', id=offender.id) }}">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700">Name</label>
+                <input type="text" name="name" id="name" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offender.name }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="license_number" class="block text-gray-700">License Number</label>
+                <input type="text" name="license_number" id="license_number" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offender.license_number }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="plate_number" class="block text-gray-700">Plate Number</label>
+                <input type="text" name="plate_number" id="plate_number" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offender.plate_number }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="contact_info" class="block text-gray-700">Contact Info</label>
+                <input type="text" name="contact_info" id="contact_info" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offender.contact_info }}" required>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Update Offender</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
