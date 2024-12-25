@@ -23,6 +23,13 @@ def create_app(config_class=Config):
     from app.auth import auth as auth_bp
     app.register_blueprint(auth_bp)
 
+    from app.main import main as main_bp
+    app.register_blueprint(main_bp)
+
+    from app.offences import offences as offences_bp
+    app.register_blueprint(offences_bp)
+
+
     @app.route('/hello')
     def hello():
         return 'Hello World!'

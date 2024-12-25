@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask_login import UserMixin
 
 from app import db, login_manager
 
@@ -8,7 +9,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # User Model
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -22,7 +23,7 @@ class User(db.Model):
 # Offence Model
 class Offence(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(10), unique=True, nullable=False)
+    name = db.Column(db.String(10), unique=True, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     penalty = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold text-blue-600">Edit Offence</h1>
+    <p class="mt-4 text-gray-600">Update the details below to edit the traffic offence.</p>
+
+    <div class="mt-8">
+        <form method="POST" action="{{ url_for('offences.edit', id=offence.id) }}">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700">Offence Name</label>
+                <input type="text" name="name" id="name" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offence.name }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700">Description</label>
+                <textarea name="description" id="description" class="w-full p-2 border border-gray-300 rounded mt-1" required>{{ offence.description }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="penalty" class="block text-gray-700">Penalty</label>
+                <input type="number" name="penalty" id="penalty" class="w-full p-2 border border-gray-300 rounded mt-1" value="{{ offence.penalty }}" required>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Update Offence</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
