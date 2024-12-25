@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -20,12 +20,16 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     
     # Import and register blueprints here
-    # from app.main import bp as main_bp
-    # app.register_blueprint(main_bp)
+    from app.auth import auth as auth_bp
+    app.register_blueprint(auth_bp)
 
     @app.route('/hello')
     def hello():
         return 'Hello World!'
+    
+    @app.route('/')
+    def index():
+        return render_template('index.html')
     
     return app
 

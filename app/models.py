@@ -1,7 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-from app import db
+from app import db, login_manager
+
+# User Loader for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # User Model
 class User(db.Model):
