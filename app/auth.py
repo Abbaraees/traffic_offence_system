@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -21,7 +21,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash('Login successful!', 'green')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('main.dashboard'))
         else:
             flash('Invalid email or password.', 'red')
 
