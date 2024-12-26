@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold text-blue-600">Add New Violation</h1>
+    <p class="mt-4 text-gray-600">Fill in the details below to add a new violation.</p>
+
+    <div class="mt-8">
+        <form method="POST" action="{{ url_for('offender_offences.create') }}">
+            <div class="mb-4">
+                <label for="offender_id" class="block text-gray-700">Offender</label>
+                <select name="offender_id" id="offender_id" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                    <option value="">Select Offender</option>
+                    {% for offender in offenders %}
+                    <option value="{{ offender.id }}">{{ offender.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="offence_id" class="block text-gray-700">Offence</label>
+                <select name="offence_id" id="offence_id" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                    <option value="">Select Offence</option>
+                    {% for offence in offences %}
+                    <option value="{{ offence.id }}">{{ offence.description }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="status" class="block text-gray-700">Status</label>
+                <select name="status" id="status" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                    <option value="unpaid">Unpaid</option>
+                    <option value="paid">Paid</option>
+                    <option value="appealed">Appealed</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="date_committed" class="block text-gray-700">Date Committed</label>
+                <input type="date" name="date_committed" id="date_committed" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Violation</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

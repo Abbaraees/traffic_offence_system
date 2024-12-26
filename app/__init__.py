@@ -32,6 +32,10 @@ def create_app(config_class=Config):
     from app.offenders import offenders as offenders_bp
     app.register_blueprint(offenders_bp)
 
+    from app.offender_offences import offender_offences as offender_offences_bp
+    app.register_blueprint(offender_offences_bp)
+
+
 
     @app.route('/hello')
     def hello():
