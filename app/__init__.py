@@ -35,6 +35,8 @@ def create_app(config_class=Config):
     from app.offender_offences import offender_offences as offender_offences_bp
     app.register_blueprint(offender_offences_bp)
 
+    from app.payments import payments as payments_bp
+    app.register_blueprint(payments_bp)
 
 
     @app.route('/hello')

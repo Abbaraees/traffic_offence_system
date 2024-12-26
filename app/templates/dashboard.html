@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold text-blue-600">Dashboard</h1>
     <p class="mt-4 text-gray-600">Welcome, {{ user.username }}!</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
         <div class="bg-white p-6 rounded-lg shadow-md">
             <div class="flex items-center">
                 <div class="bg-blue-600 text-white p-3 rounded-full">
@@ -32,6 +32,21 @@
                 <div class="ml-4">
                     <h2 class="text-xl font-bold">${{ total_penalties }}</h2>
                     <p class="text-gray-600">Total Penalties</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center">
+                <div class="bg-purple-600 text-white p-3 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h2 class="text-xl font-bold">${{ total_payments }}</h2>
+                    <p class="text-gray-600">Total Payments Received</p>
                 </div>
             </div>
         </div>
@@ -69,7 +84,7 @@
 
     <div class="mt-8">
         <h2 class="text-2xl font-bold text-blue-600">Quick Links</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
             <a href="/offences" class="bg-blue-600 text-white p-4 rounded-lg shadow-md text-center hover:bg-blue-700">Manage Offences</a>
             <a href="/offenders" class="bg-green-600 text-white p-4 rounded-lg shadow-md text-center hover:bg-green-700">Manage Offenders</a>
             <a href="/payments" class="bg-yellow-600 text-white p-4 rounded-lg shadow-md text-center hover:bg-yellow-700">Manage Payments</a>

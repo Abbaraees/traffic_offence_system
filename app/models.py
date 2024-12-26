@@ -60,13 +60,12 @@ class OffenderOffence(db.Model):
 # Payment Model
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    offender_id = db.Column(db.Integer, db.ForeignKey('offender.id'), nullable=False)
+    offender_offence_id = db.Column(db.Integer, db.ForeignKey('offender_offence.id'), nullable=False)
     amount = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default='unpaid')  # unpaid, paid
     payment_date = db.Column(db.DateTime, nullable=True)
 
-    offender = db.relationship('Offender', backref=db.backref('payments', lazy=True))
+    offender_offence = db.relationship('OffenderOffence', backref=db.backref('payments', lazy=True))
 
     def __repr__(self):
-        return f"<Payment {self.offender_id} - {self.amount}>"
-
+        return f"<Payment {self.offender_offence_id} - {self.amount}>"

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-from app.models import Offence, OffenderOffence, db
+from app.models import Offence, OffenderOffence, Payment, db
 from sqlalchemy import func
 
 main = Blueprint('main', __name__)
@@ -30,4 +30,7 @@ def dashboard():
         func.count(OffenderOffence.id).label('count')
     ).group_by('year').all()
     
-    return render_template('dashboard.html', user=current_user, total_offences=total_offences, total_penalties=total_penalties, offence_trends=offence_trends, monthly_offences=monthly_offences, yearly_offences=yearly_offences)
+    # Query for total payments received
+    total_payments = db.session.query(func.sum(Payment.amount)).filter(Payment.status == 'paid').scalar()
+    
+    return render_template('dashboard.html', user=current_user, total_offences=total_offences, total_penalties=total_penalties, offence_trends=offence_trends, monthly_offences=monthly_offences, yearly_offences=yearly_offences, total_payments=total_payments)
